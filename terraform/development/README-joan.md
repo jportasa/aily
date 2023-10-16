@@ -87,6 +87,8 @@ We can protect the API endpoint somehow keeping track of the origin (out of the 
 - External-dns: to automate the creation of route53 entries based on the Ingress.
 - Logs: Fluentbit or OpenTelemetry
 - Prometheus/OpenTelemetry for metrics.
+- Keda to scale POD's.
+- Karpenter to scale nodes efficiently.
 
 ## Deploy the applications
 
