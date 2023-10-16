@@ -15,7 +15,7 @@ go build -o ami_cli
 ```
 For the help, just type:
 ```
-$ ./ami_cli -h
+./ami_cli -h
 Usage of ./ami_cli:
   -architecture string
         AMI architecture (e.g., x86_64, arm64)
