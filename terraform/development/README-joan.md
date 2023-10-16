@@ -15,6 +15,8 @@ In this folder we have two terraform projects:
     2. Data plane (Nodegroup) in private subnets.
     3. Addons.
     4. IAM roles created (aws-auth).
+    5. Access to the front/app just from the ALB. allowing port 80 only.
+    6. HA using two AZ's where to spread the depolyment's PODs (The control plane is as well in HA).
 
 First run in terraform the "network" plan and next the "EKS" plan with
 ````
@@ -24,7 +26,7 @@ terraform apply
 ```
 Notes
 - I use different plans because at scale, when you have a lot of resources, terraform commands are getting slower and slower if you use just one plan. As well is a more clear to organize the projects and find resources by project. (Atlantis)[https://www.runatlantis.io/] is a good candidate to deploy any of the plans in an automated way. You can use terraform data sources and teraform remote state to refference dependencies between plans.
-- I have created the Dynamo table to lock concurrent terraform changes.
+- I have created the Dynamo table to lock concurrent terraform changes in terraform.tf
 
 ## Accessing the cluster
 
@@ -85,9 +87,16 @@ We can protect the API endpoint somehow keeping track of the origin (out of the 
 ## Deploy other k8s infra components
 
 - External-dns: to automate the creation of route53 entries based on the Ingress.
+```
+helm install my-release oci://registry-1.docker.io/bitnamicharts/external-dns
+```
 - Logs: Fluentbit or OpenTelemetry
 - Prometheus/OpenTelemetry for metrics.
 - Keda to scale POD's.
+```
+helm repo add kedacore https://kedacore.github.io/charts
+helm install keda kedacore/keda --namespace keda --create-namespace
+```
 - Karpenter to scale nodes efficiently.
 
 ## Deploy the applications
@@ -95,8 +104,16 @@ We can protect the API endpoint somehow keeping track of the origin (out of the 
 For the Task - 3 I have created the /charts folder to be deployed in kind.
 We can use these helm charts folder of the current repo with some tunning:
 
-- Add ALB annotations in the ingress
+- Add ALB annotations in the two ingresses
+```
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/scheme: internet-facing
+```
 - Change hostnames in the two ingresses instead of localhost (www.aily.com and api.aily.com)
 
+All the app's can be deployed using GitOps in more automated way.
 
 For the Task - 3, please return to the README that is in the root folder.

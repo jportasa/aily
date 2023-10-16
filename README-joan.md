@@ -72,10 +72,10 @@ Using [Flux Image Automation](https://fluxcd.io/flux/guides/image-update/) we ca
 Once a new container image tag is discovered, Flux controller will commit in the repo the new tag, more precisely, in the helm deployment image field of the yaml manifest the new tag and Flux will deploy it.
 
 ### Deploying changes in infrastructure
-Once Flux is installed (flux install...), with its own set of controllers with access to Git, we can create a folders structure using kustomization.yaml gitrepository.yaml and helmrelease.yaml 
-which will be in charge of deploying automatically the helm charts updates once we update our Git repo.
+Once Flux is installed (flux bootstrap github...), with its own set of controllers with access to Git, we can create a folders structure using kustomization.yaml, gitrepository.yaml and helmrelease.yaml, something like https://fluxcd.io/flux/guides/repository-structure/.
+which will be in charge of deploying automatically the helm charts updates once we update our manifests in the Git repo.
 
-helmrelease.yaml for API:
+e.g. helmrelease.yaml for API:
 ```
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
@@ -104,7 +104,7 @@ spec:
         memory: 256Mi
     replicas: 1
 ```
-and kustomization.yaml for API:
+e.g. kustomization.yaml for API:
 ````
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization

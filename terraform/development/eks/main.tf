@@ -23,6 +23,7 @@ module "eks" {
   subnet_ids               = [data.aws_subnet.aily_vpc_public_us_east_1a.id, data.aws_subnet.aily_vpc_public_us_east_1b.id]  #["subnet-abcde012", "subnet-bcde012a"]
   control_plane_subnet_ids = [data.aws_subnet.aily_vpc_public_us_east_1a.id, data.aws_subnet.aily_vpc_public_us_east_1b.id] #["subnet-xyzde987", "subnet-slkjf456"]
 
+  # Data Plane
   eks_managed_node_groups = {
     green = {
       subnet_ids   = [data.aws_subnet.aily_vpc_private_us_east_1a.id, data.aws_subnet.aily_vpc_private_us_east_1b.id]
