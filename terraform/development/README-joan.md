@@ -23,7 +23,7 @@ terraform plan
 terraform apply
 ```
 Notes
-- I use different plans because at scale, when you have a lot of resources, terraform commands are getting slower and slower if you use just one plan. As well is a more clear to organize the projects and find resources by project. (Atlantis)[https://www.runatlantis.io/] is a good candidate to deploy any of the plans in an automated way.
+- I use different plans because at scale, when you have a lot of resources, terraform commands are getting slower and slower if you use just one plan. As well is a more clear to organize the projects and find resources by project. (Atlantis)[https://www.runatlantis.io/] is a good candidate to deploy any of the plans in an automated way. You can use terraform data sources and teraform remote state to refference dependencies between plans.
 - I have created the Dynamo table to lock concurrent terraform changes.
 
 ## Accessing the cluster
