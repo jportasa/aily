@@ -7,14 +7,14 @@ I have used multistage builds to reduce the size of the images. The frontend onl
 This command will build and start the 2 containers (api, sys-stats):
 ```
 docker-compose up
-````
-Access to http://localhost/ with your browser.
+```
+Access to http://localhost/ from your browser.
 
-Stop:
-````
+Stop docker-compose:
+```
 docker-compose down
 ```
-Note: I have considered that three containers are not necessary, because as frontend I already use a nginx, serving the static files. The conainer image is reduced drastically to 43.2MB in this way.
+Note: I have considered that three containers are not necessary, because as frontend I already use a nginx, serving the static files. The container image is reduced drastically to 43.2MB in this way.
 
 Anyway, just to show how would be a reverse proxy in front of sys-stats in folder /reverse-proxy, there is the configuration.
 
@@ -30,11 +30,11 @@ See the README in /terraform folder
 ```
 kind create cluster --name aily --config ./kind/kind.config
 ```
-Install Nginx ingress
+Install Nginx Ingress Controller
 ```
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 ```
-## Rebuild sys-stats and Upload the images to Kind Aily cluster
+## Rebuild sys-stats and upload the images to Kind Aily cluster
 
 Replace in src/App.js fetch('http://localhost:8080/stats') --> fetch('http://localhost:80/stats') and rebuild it
 ```
@@ -50,17 +50,19 @@ Note: I use latest tag in images to simplify the CICD, but in production the tag
 
 ## helm charts install
 Create the namespace
-````
+```
 kubectl create namespace aily
-````
+```
 Install api
-````
+```
 helm install api ./charts/api --namespace aily 
 ```
 Install sys-stats
-````
+```
 helm install sys-stats ./charts/sys-stats --namespace aily 
 ```
+
+Access from your browser http://localhost after a while.
 
 ## (extra) How to manage the continuous deployment with FluxCD
 

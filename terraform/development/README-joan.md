@@ -95,3 +95,6 @@ We can use these helm charts folder of the current repo with some tunning:
 
 - Add ALB annotations in the ingress
 - Change hostnames in the two ingresses instead of localhost (www.aily.com and api.aily.com)
+
+
+For the Task - 3, please return to the README that is in the root folder.
