@@ -1,7 +1,7 @@
 # Instructions to run the CLI
 
 Fetch the modules:
-````
+```
 go get -u
 ```
 Run examples:
