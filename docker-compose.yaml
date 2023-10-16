@@ -1,0 +1,14 @@
+services:
+  api:
+    build: ./api
+    image: api
+    ports:
+    - '8080:8080'
+  sys-stats:
+    build: ./sys-stats
+    image: sys-stats
+    ports:
+    - '80:80'
+
+
+

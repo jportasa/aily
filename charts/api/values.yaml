@@ -1,0 +1,10 @@
+app:
+  image: "api:latest"
+  resources:
+    requests:
+      cpu: 200m
+      memory: 64Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
+replicas: 1
