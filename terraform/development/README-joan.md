@@ -2,7 +2,7 @@
 
 ## Initial design considerations
 
-To simplify, I would put the frontend in S3 and the backend in an APIGW + ECS, or APIGW + Lambda (depending on traffic profile), but as I understand that your frontend in the future will be dynamic (not compatible with S3) and as well you want to test my skills in EKS as Aily uses it, I am going to create all infra in EKS.
+To simplify, I would put the frontend in S3 and the backend in an ALB + ECS, or APIGW + Lambda (depending on traffic profile), but as I understand that your frontend in the future will be dynamic (not compatible with S3) and as well you want to test my skills in EKS as Aily uses it, I am going to create all infra in EKS.
 
 ## EKS solution
 
